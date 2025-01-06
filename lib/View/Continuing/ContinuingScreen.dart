@@ -37,7 +37,7 @@ class _HomeScreenState extends State<ContinuingScreen> {
               padding:  EdgeInsets.symmetric(horizontal: width * 0.1),
               child: RichText(
                 textAlign: TextAlign.center,
-                text: TextSpan(
+                text: const TextSpan(
                   text: 'Lets Start your manga ',
                   style: TextStyle(fontSize: 31, fontWeight: FontWeight.bold,color: Colors.black),
                   children: <TextSpan>[
