@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1060873055817",
+    "project_id": "comic-app-efea6",
+    "storage_bucket": "comic-app-efea6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060873055817:android:bde7167ac801cd0e87d998",
+        "android_client_info": {
+          "package_name": "com.example.comic_reading_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuzfoUfc1UP1IxWukdgXEgFV6OH4cKxO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
