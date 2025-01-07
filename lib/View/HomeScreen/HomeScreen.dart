@@ -1,5 +1,9 @@
+import 'package:comic_reading_app/Models/Movies_Model.dart';
+import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Components/SectionHeading.dart';
 import 'package:flutter/material.dart';
+
+import '../../Models/Trending_Comic_Model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,78 +46,91 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               SizedBox(height: height * 0.03),
 
-              /// Trendings Designs
+              /// Trendings Designs (Done)
               SizedBox(height: height * 0.03),
-              const SectionHeading(title: 'Trending'),
+              const SectionHeading(title: 'Trending Movies'),
               SizedBox(height: height * 0.03),
               SizedBox(
                 height: height * 0.25,
                 width: width * 0.9,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Stack(
-                      children: [
-                        Container(
-                          height: height * 0.25,
-                          width: width * 0.5,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/your_image.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                child: FutureBuilder<Movies_Model>(
+                  future: ComicViewModel().fetchMoviesApi(), // Your method for fetching data
+                  builder: (BuildContext context,snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (snapshot.hasData) {
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount:snapshot.data!.total,
+                        itemBuilder: (context, index) {
+                          return Stack(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
+                              Container(
+                                height: height * 0.25,
+                                width: width * 0.5,
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(snapshot.data!.data![index].coverUrl.toString()),  // Fetch the image using the URL
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      'The Watchman',
-                                      style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    SizedBox(height: height * 0.01),
-                                    const Text(
-                                      'Alan Moore',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white,
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                      snapshot.data!.data![index].title.toString(),
+                                            style: const TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          SizedBox(height: height * 0.01),
+                                          Text(
+                                            snapshot.data!.data![index].directedBy.toString() ,  // Display author info
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
+                              Positioned(
+                                top: 10,
+                                right: 10,
+                                child: IconButton(
+                                  icon: const Icon(Icons.favorite_border, color: Colors.white),
+                                  onPressed: () {
+                                    // Handle favorite button tap here
+                                  },
+                                ),
+                              ),
                             ],
-                          ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          right: 10,
-                          child: IconButton(
-                            icon: const Icon(Icons.favorite_border, color: Colors.white),
-                            onPressed: () {
-                              // Handle favorite button tap here
-                            },
-                          ),
-                        ),
-                      ],
-                    );
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(child: Text('No data available'));
+                    }
                   },
                 ),
               ),
+
 
               /// Recommended Designs
               SizedBox(height: height * 0.03),
@@ -253,3 +270,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+
