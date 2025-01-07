@@ -71,7 +71,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
             ),
           ),
           SizedBox(height: height * 0.05),
-          /// Vertical ListView for comic cards
+          // Vertical ListView for comic cards
           Expanded(
             child: ListView.builder(
               itemCount: 5,
@@ -129,6 +129,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                        // Favorite icon button
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: IconButton(
+                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            onPressed: () {
+                              // Handle favorite button action
+                            },
                           ),
                         ),
                       ],

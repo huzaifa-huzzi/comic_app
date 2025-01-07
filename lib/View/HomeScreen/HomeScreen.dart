@@ -10,9 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -44,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: height * 0.03,),
+              SizedBox(height: height * 0.03),
 
               /// Trendings Designs
               SizedBox(height: height * 0.03),
@@ -57,56 +54,71 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: height * 0.25,
-                      width: width * 0.5,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/your_image.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'The Watchman',
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: height * 0.01),
-                                Text(
-                                  'Alan Moore',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                    return Stack(
+                      children: [
+                        Container(
+                          height: height * 0.25,
+                          width: width * 0.5,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/your_image.jpg'),
+                              fit: BoxFit.cover,
                             ),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                        ],
-                      ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'The Watchman',
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(height: height * 0.01),
+                                    Text(
+                                      'Alan Moore',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: IconButton(
+                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            onPressed: () {
+                              // Handle favorite button tap here
+                            },
+                          ),
+                        ),
+                      ],
                     );
                   },
                 ),
               ),
-          /// Recommeded Designs
+
+              /// Recommended Designs
               SizedBox(height: height * 0.03),
-              SectionHeading(title: 'Recomended'),
+              SectionHeading(title: 'Recommended'),
               SizedBox(height: height * 0.03),
               SizedBox(
                 height: height * 0.25,
@@ -115,53 +127,68 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: height * 0.25,
-                      width: width * 0.5,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/your_image.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'The Watchman',
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: height * 0.01),
-                                Text(
-                                  'Alan Moore',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                    return Stack(
+                      children: [
+                        Container(
+                          height: height * 0.25,
+                          width: width * 0.5,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/your_image.jpg'),
+                              fit: BoxFit.cover,
                             ),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                        ],
-                      ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'The Watchman',
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(height: height * 0.01),
+                                    Text(
+                                      'Alan Moore',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: IconButton(
+                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            onPressed: () {
+                              // Handle favorite button tap here
+                            },
+                          ),
+                        ),
+                      ],
                     );
                   },
                 ),
               ),
+
               /// Top Authors
               SizedBox(height: height * 0.03),
               SectionHeading(title: 'Top Authors'),
@@ -173,28 +200,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: height * 0.25,
-                      width: width * 0.5,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/your_image.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
+                    return Stack(
+                      children: [
+                        Container(
+                          height: height * 0.25,
+                          width: width * 0.5,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/your_image.jpg'),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
                                   'Alan Moore',
                                   style: TextStyle(
                                     fontSize: 16,
@@ -202,11 +228,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.white,
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: IconButton(
+                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            onPressed: () {
+                              // Handle favorite button tap here
+                            },
+                          ),
+                        ),
+                      ],
                     );
                   },
                 ),
