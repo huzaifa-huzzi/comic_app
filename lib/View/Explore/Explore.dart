@@ -24,7 +24,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Explore',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
@@ -47,7 +47,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     });
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(right: 30, left: 20),
+                    padding: const EdgeInsets.only(right: 30, left: 20),
                     child: Container(
                       decoration: BoxDecoration(
                         color: categoryName == categoriesList[index]
@@ -56,11 +56,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Center(
                           child: Text(
                             categoriesList[index],
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: const TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ),
                       ),
@@ -77,12 +77,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
               itemCount: 5,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Container(
                     height: height * 0.25,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: AssetImage('assets/comic_placeholder.jpg'),
                         fit: BoxFit.cover,
                       ),
@@ -114,16 +114,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             children: [
                               Text(
                                 'Comic Name $index',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(height: 5),
                               Text(
                                 'Author Name $index',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white70,
                                   fontSize: 14,
                                 ),
@@ -136,7 +136,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           top: 10,
                           right: 10,
                           child: IconButton(
-                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            icon: const Icon(Icons.favorite_border, color: Colors.white),
                             onPressed: () {
                               // Handle favorite button action
                             },

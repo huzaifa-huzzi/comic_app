@@ -1,4 +1,3 @@
-import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/SectionHeading.dart';
 import 'package:flutter/material.dart';
 
@@ -20,17 +19,17 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 20,
               backgroundImage: AssetImage('assets/Images/your_image.png'),
             ),
             SizedBox(width: width * 0.03),
-            Text('Hey, Huzaifa!'),
+            const Text('Hey, Huzaifa!'),
           ],
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
         ],
@@ -45,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               /// Trendings Designs
               SizedBox(height: height * 0.03),
-              SectionHeading(title: 'Trending'),
+              const SectionHeading(title: 'Trending'),
               SizedBox(height: height * 0.03),
               SizedBox(
                 height: height * 0.25,
@@ -59,10 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           height: height * 0.25,
                           width: width * 0.5,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
                             color: Colors.blue,
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image: AssetImage('assets/images/your_image.jpg'),
                               fit: BoxFit.cover,
                             ),
@@ -77,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'The Watchman',
                                       style: TextStyle(
                                         fontSize: 22,
@@ -86,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     SizedBox(height: height * 0.01),
-                                    Text(
+                                    const Text(
                                       'Alan Moore',
                                       style: TextStyle(
                                         fontSize: 16,
@@ -104,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: 10,
                           right: 10,
                           child: IconButton(
-                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            icon: const Icon(Icons.favorite_border, color: Colors.white),
                             onPressed: () {
                               // Handle favorite button tap here
                             },
@@ -118,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               /// Recommended Designs
               SizedBox(height: height * 0.03),
-              SectionHeading(title: 'Recommended'),
+              const SectionHeading(title: 'Recommended'),
               SizedBox(height: height * 0.03),
               SizedBox(
                 height: height * 0.25,
@@ -132,10 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           height: height * 0.25,
                           width: width * 0.5,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
                             color: Colors.blue,
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image: AssetImage('assets/images/your_image.jpg'),
                               fit: BoxFit.cover,
                             ),
@@ -150,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'The Watchman',
                                       style: TextStyle(
                                         fontSize: 22,
@@ -159,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     SizedBox(height: height * 0.01),
-                                    Text(
+                                    const Text(
                                       'Alan Moore',
                                       style: TextStyle(
                                         fontSize: 16,
@@ -177,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: 10,
                           right: 10,
                           child: IconButton(
-                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            icon: const Icon(Icons.favorite_border, color: Colors.white),
                             onPressed: () {
                               // Handle favorite button tap here
                             },
@@ -191,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               /// Top Authors
               SizedBox(height: height * 0.03),
-              SectionHeading(title: 'Top Authors'),
+              const SectionHeading(title: 'Top Authors'),
               SizedBox(height: height * 0.03),
               SizedBox(
                 height: height * 0.25,
@@ -205,21 +204,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           height: height * 0.25,
                           width: width * 0.5,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
                             color: Colors.blue,
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image: AssetImage('assets/images/your_image.jpg'),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Column(
+                          child: const Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: EdgeInsets.all(10.0),
                                 child: Text(
                                   'Alan Moore',
                                   style: TextStyle(
@@ -236,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: 10,
                           right: 10,
                           child: IconButton(
-                            icon: Icon(Icons.favorite_border, color: Colors.white),
+                            icon: const Icon(Icons.favorite_border, color: Colors.white),
                             onPressed: () {
                               // Handle favorite button tap here
                             },

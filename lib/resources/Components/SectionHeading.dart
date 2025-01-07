@@ -1,4 +1,3 @@
-import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:flutter/material.dart';
 
 class SectionHeading extends StatelessWidget {
@@ -21,7 +20,7 @@ class SectionHeading extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
