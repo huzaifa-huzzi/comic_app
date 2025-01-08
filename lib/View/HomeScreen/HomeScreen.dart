@@ -1,5 +1,6 @@
 import 'package:comic_reading_app/Models/Characters_comic_Model.dart';
 import 'package:comic_reading_app/Models/Movies_Model.dart';
+import 'package:comic_reading_app/View/DetailMoviesScreen/DetailMovieScreen.dart';
 import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/SectionHeading.dart';
@@ -67,62 +68,75 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount:snapshot.data!.total,
                         itemBuilder: (context, index) {
-                          return Stack(
-                            children: [
-                              Container(
-                                height: height * 0.25,
-                                width: width * 0.5,
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(snapshot.data!.data![index].coverUrl.toString()),  // Fetch the image using the URL
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                      snapshot.data!.data![index].title.toString(),
-                                            style: const TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          SizedBox(height: height * 0.01),
-                                          Text(
-                                            snapshot.data!.data![index].directedBy.toString() ,  // Display author info
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                          return InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder:(context) => DetailMovieScreen(
+                                      imageUrl:snapshot.data!.data![index].coverUrl.toString() ,
+                                      title: snapshot.data!.data![index].title.toString(),
+                                      description: snapshot.data!.data![index].directedBy.toString(),
+                                      source: snapshot.data!.data![index].trailerUrl.toString(),
+                                      date: snapshot.data!.data![index].releaseDate.toString())
+                              ),
+                              );
+                            },
+                            child: Stack(
+                              children: [
+                                Container(
+                                  height: height * 0.25,
+                                  width: width * 0.5,
+                                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(snapshot.data!.data![index].coverUrl.toString()),  // Fetch the image using the URL
+                                      fit: BoxFit.cover,
                                     ),
-                                  ],
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                        snapshot.data!.data![index].title.toString(),
+                                              style: const TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(height: height * 0.01),
+                                            Text(
+                                              snapshot.data!.data![index].directedBy.toString() ,  // Display author info
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: IconButton(
-                                  icon: const Icon(Icons.favorite_border, color: Colors.white),
-                                  onPressed: () {
-                                    // Handle favorite button tap here
-                                  },
+                                Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: IconButton(
+                                    icon: const Icon(Icons.favorite_border, color: Colors.white),
+                                    onPressed: () {
+                                      // Handle favorite button tap here
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         },
                       );
