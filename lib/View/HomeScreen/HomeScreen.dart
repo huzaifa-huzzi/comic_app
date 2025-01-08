@@ -1,5 +1,7 @@
+import 'package:comic_reading_app/Models/Characters_comic_Model.dart';
 import 'package:comic_reading_app/Models/Movies_Model.dart';
 import 'package:comic_reading_app/View_model/comic_view_Model.dart';
+import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/SectionHeading.dart';
 import 'package:flutter/material.dart';
 
@@ -132,136 +134,164 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
 
-              /// Recommended Designs
+              /// Recommended Comics
               SizedBox(height: height * 0.03),
-              const SectionHeading(title: 'Recommended'),
+              const SectionHeading(title: 'Recommended Comics'),
               SizedBox(height: height * 0.03),
               SizedBox(
                 height: height * 0.25,
                 width: width * 0.9,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Stack(
-                      children: [
-                        Container(
-                          height: height * 0.25,
-                          width: width * 0.5,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/your_image.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'The Watchman',
-                                      style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    SizedBox(height: height * 0.01),
-                                    const Text(
-                                      'Alan Moore',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          right: 10,
-                          child: IconButton(
-                            icon: const Icon(Icons.favorite_border, color: Colors.white),
-                            onPressed: () {
-                              // Handle favorite button tap here
-                            },
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                child: FutureBuilder<TrendingApiModel>(
+                    future: ComicViewModel().fetchTrendingComicApi(),
+                    builder: (BuildContext context,snapshot){
+                       if(snapshot.connectionState == ConnectionState.waiting){
+                         return Center(child: CircularProgressIndicator(color: AppColors.primary,),);
+                       } else if(snapshot.hasError){
+                         return Center(child: Text('Error: ${snapshot.error}'));
+                       } else if(snapshot.hasData) {
+                         return  ListView.builder(
+                           scrollDirection: Axis.horizontal,
+                           itemCount:snapshot.data!.data!.total,
+                           itemBuilder: (context, index) {
+                             return Stack(
+                               children: [
+                                 Container(
+                                   height: height * 0.25,
+                                   width: width * 0.5,
+                                   margin: const EdgeInsets.symmetric(horizontal: 10),
+                                   decoration: BoxDecoration(
+                                     color: Colors.blue,
+                                     image:  DecorationImage(
+                                       image: AssetImage(snapshot.data!.data!.results![index].thumbnail.toString()),
+                                       fit: BoxFit.cover,
+                                     ),
+                                     borderRadius: BorderRadius.circular(15),
+                                   ),
+                                   child: Column(
+                                     mainAxisAlignment: MainAxisAlignment.end,
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     children: [
+                                       Padding(
+                                         padding: const EdgeInsets.all(10.0),
+                                         child: Column(
+                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                           children: [
+                                              Text(
+                                               snapshot.data!.data!.results![index].title.toString(),
+                                               style: const  TextStyle(
+                                                 fontSize: 22,
+                                                 fontWeight: FontWeight.bold,
+                                                 color: Colors.white,
+                                               ),
+                                             ),
+                                             SizedBox(height: height * 0.01),
+                                              Text(
+                                               snapshot.data!.data!.results![index].description.toString(),
+                                               style:const  TextStyle(
+                                                 fontSize: 16,
+                                                 fontWeight: FontWeight.w400,
+                                                 color: Colors.white,
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                       ),
+                                     ],
+                                   ),
+                                 ),
+                                 Positioned(
+                                   top: 10,
+                                   right: 10,
+                                   child: IconButton(
+                                     icon: const Icon(Icons.favorite_border, color: Colors.white),
+                                     onPressed: () {
+                                       // Handle favorite button tap here
+                                     },
+                                   ),
+                                 ),
+                               ],
+                             );
+                           },
+                         );
+
+                       }  else {
+                         return const Center(child: Text('No data available'));
+                       }
+                    }
                 ),
               ),
 
-              /// Top Authors
+
+              /// Top Characters
               SizedBox(height: height * 0.03),
-              const SectionHeading(title: 'Top Authors'),
+              const SectionHeading(title: 'Top Characters'),
               SizedBox(height: height * 0.03),
               SizedBox(
                 height: height * 0.25,
                 width: width * 0.9,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return Stack(
-                      children: [
-                        Container(
-                          height: height * 0.25,
-                          width: width * 0.5,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/your_image.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Text(
-                                  'Alan Moore',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          top: 10,
-                          right: 10,
-                          child: IconButton(
-                            icon: const Icon(Icons.favorite_border, color: Colors.white),
-                            onPressed: () {
-                              // Handle favorite button tap here
-                            },
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                child: FutureBuilder<CharactersComicModel>(
+                    future:ComicViewModel().fetchCharacterApi() ,
+                    builder: (BuildContext context,snapshot){
+                       if(snapshot.connectionState == ConnectionState.waiting){
+                         return Center(child: CircularProgressIndicator(color: AppColors.primary,),);
+                       } else if(snapshot.hasError){
+                         return Center(child: Text('Error: ${snapshot.error}'));
+                       } else if(snapshot.hasData){
+                         return ListView.builder(
+                           scrollDirection: Axis.horizontal,
+                           itemCount:snapshot.data!.data!.total,
+                           itemBuilder: (context, index) {
+                             return Stack(
+                               children: [
+                                 Container(
+                                   height: height * 0.25,
+                                   width: width * 0.5,
+                                   margin: const EdgeInsets.symmetric(horizontal: 10),
+                                   decoration: BoxDecoration(
+                                     color: Colors.blue,
+                                     image:  DecorationImage(
+                                       image: AssetImage(snapshot.data!.data!.results![index].comics.toString()),
+                                       fit: BoxFit.cover,
+                                     ),
+                                     borderRadius: BorderRadius.circular(15),
+                                   ),
+                                   child:  Column(
+                                     mainAxisAlignment: MainAxisAlignment.end,
+                                     crossAxisAlignment: CrossAxisAlignment.start,
+                                     children: [
+                                       Padding(
+                                         padding: EdgeInsets.all(10.0),
+                                         child: Text(
+                                           snapshot.data!.data!.results![index].name.toString(),
+                                           style: TextStyle(
+                                             fontSize: 16,
+                                             fontWeight: FontWeight.w400,
+                                             color: Colors.white,
+                                           ),
+                                         ),
+                                       ),
+                                     ],
+                                   ),
+                                 ),
+                                 Positioned(
+                                   top: 10,
+                                   right: 10,
+                                   child: IconButton(
+                                     icon: const Icon(Icons.favorite_border, color: Colors.white),
+                                     onPressed: () {
+                                        // Handle favorite button tap here
+                                     },
+                                   ),
+                                 ),
+                               ],
+                             );
+                           },
+                         );
+                    } else {
+                         return const Center(child: Text('No data available'));
+                       }
+                    }
+                )
               ),
             ],
           ),
@@ -270,6 +300,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
 
 
 

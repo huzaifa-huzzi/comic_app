@@ -1,3 +1,4 @@
+import 'package:comic_reading_app/Models/Characters_comic_Model.dart';
 import 'package:comic_reading_app/Models/Movies_Model.dart';
 import 'package:comic_reading_app/Models/Trending_Comic_Model.dart';
 import 'package:comic_reading_app/Repository/comic_Repository.dart';
@@ -12,6 +13,12 @@ class ComicViewModel{
 
   Future<Movies_Model>fetchMoviesApi()async{
     final response =await _repo.fetchMoviesApi();
+    return response;
+  }
+
+
+  Future<CharactersComicModel>fetchCharacterApi()async{
+    final response =await _repo.fetchCharacterApi();
     return response;
   }
 
