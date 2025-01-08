@@ -29,12 +29,12 @@ class TrendingApiModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['code'] = this.code;
-    data['status'] = this.status;
-    data['copyright'] = this.copyright;
-    data['attributionText'] = this.attributionText;
-    data['attributionHTML'] = this.attributionHTML;
-    data['etag'] = this.etag;
+    data['code'] = code;
+    data['status'] = status;
+    data['copyright'] = copyright;
+    data['attributionText'] = attributionText;
+    data['attributionHTML'] = attributionHTML;
+    data['etag'] = etag;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -72,12 +72,12 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['offset'] = this.offset;
-    data['limit'] = this.limit;
-    data['total'] = this.total;
-    data['count'] = this.count;
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
+    data['offset'] = offset;
+    data['limit'] = limit;
+    data['total'] = total;
+    data['count'] = count;
+    if (results != null) {
+      data['results'] = results!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -143,27 +143,27 @@ class Results {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['modified'] = this.modified;
-    data['format'] = this.format;
-    data['pageCount'] = this.pageCount;
-    if (this.textObjects != null) {
-      data['textObjects'] = this.textObjects!.map((v) => v.toJson()).toList();
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['modified'] = modified;
+    data['format'] = format;
+    data['pageCount'] = pageCount;
+    if (textObjects != null) {
+      data['textObjects'] = textObjects!.map((v) => v.toJson()).toList();
     }
-    data['resourceURI'] = this.resourceURI;
-    if (this.urls != null) {
-      data['urls'] = this.urls!.map((v) => v.toJson()).toList();
+    data['resourceURI'] = resourceURI;
+    if (urls != null) {
+      data['urls'] = urls!.map((v) => v.toJson()).toList();
     }
-    if (this.series != null) {
-      data['series'] = this.series!.toJson();
+    if (series != null) {
+      data['series'] = series!.toJson();
     }
-    if (this.thumbnail != null) {
-      data['thumbnail'] = this.thumbnail!.toJson();
+    if (thumbnail != null) {
+      data['thumbnail'] = thumbnail!.toJson();
     }
-    if (this.creators != null) {
-      data['creators'] = this.creators!.toJson();
+    if (creators != null) {
+      data['creators'] = creators!.toJson();
     }
     return data;
   }
@@ -184,9 +184,9 @@ class TextObjects {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['type'] = this.type;
-    data['language'] = this.language;
-    data['text'] = this.text;
+    data['type'] = type;
+    data['language'] = language;
+    data['text'] = text;
     return data;
   }
 }
@@ -204,8 +204,8 @@ class Urls {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['type'] = this.type;
-    data['url'] = this.url;
+    data['type'] = type;
+    data['url'] = url;
     return data;
   }
 }
@@ -223,8 +223,8 @@ class Series {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['resourceURI'] = this.resourceURI;
-    data['name'] = this.name;
+    data['resourceURI'] = resourceURI;
+    data['name'] = name;
     return data;
   }
 }
@@ -242,8 +242,8 @@ class Thumbnail {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['path'] = this.path;
-    data['extension'] = this.extension;
+    data['path'] = path;
+    data['extension'] = extension;
     return data;
   }
 }
@@ -275,12 +275,12 @@ class Creators {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['available'] = this.available;
-    data['collectionURI'] = this.collectionURI;
-    if (this.items != null) {
-      data['items'] = this.items!.map((v) => v.toJson()).toList();
+    data['available'] = available;
+    data['collectionURI'] = collectionURI;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
     }
-    data['returned'] = this.returned;
+    data['returned'] = returned;
     return data;
   }
 }
@@ -300,9 +300,9 @@ class Items {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['resourceURI'] = this.resourceURI;
-    data['name'] = this.name;
-    data['role'] = this.role;
+    data['resourceURI'] = resourceURI;
+    data['name'] = name;
+    data['role'] = role;
     return data;
   }
 }

@@ -250,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                    decoration: BoxDecoration(
                                      color: Colors.blue,
                                      image:  DecorationImage(
-                                       image: AssetImage(snapshot.data!.data!.results![index].comics.toString()),
+                                       image: AssetImage(snapshot.data!.data!.results![index].thumbnail.toString()),
                                        fit: BoxFit.cover,
                                      ),
                                      borderRadius: BorderRadius.circular(15),
@@ -260,10 +260,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                      crossAxisAlignment: CrossAxisAlignment.start,
                                      children: [
                                        Padding(
-                                         padding: EdgeInsets.all(10.0),
+                                         padding: const EdgeInsets.all(10.0),
                                          child: Text(
                                            snapshot.data!.data!.results![index].name.toString(),
-                                           style: TextStyle(
+                                           style: const TextStyle(
                                              fontSize: 16,
                                              fontWeight: FontWeight.w400,
                                              color: Colors.white,

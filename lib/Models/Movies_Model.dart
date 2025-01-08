@@ -8,18 +8,18 @@ class Movies_Model {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
     total = json['total'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['total'] = this.total;
+    data['total'] = total;
     return data;
   }
 }
@@ -77,22 +77,22 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['release_date'] = this.releaseDate;
-    data['box_office'] = this.boxOffice;
-    data['duration'] = this.duration;
-    data['overview'] = this.overview;
-    data['cover_url'] = this.coverUrl;
-    data['trailer_url'] = this.trailerUrl;
-    data['directed_by'] = this.directedBy;
-    data['phase'] = this.phase;
-    data['saga'] = this.saga;
-    data['chronology'] = this.chronology;
-    data['post_credit_scenes'] = this.postCreditScenes;
-    data['imdb_id'] = this.imdbId;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['release_date'] = releaseDate;
+    data['box_office'] = boxOffice;
+    data['duration'] = duration;
+    data['overview'] = overview;
+    data['cover_url'] = coverUrl;
+    data['trailer_url'] = trailerUrl;
+    data['directed_by'] = directedBy;
+    data['phase'] = phase;
+    data['saga'] = saga;
+    data['chronology'] = chronology;
+    data['post_credit_scenes'] = postCreditScenes;
+    data['imdb_id'] = imdbId;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
