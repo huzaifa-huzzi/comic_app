@@ -1,5 +1,8 @@
+import 'package:comic_reading_app/Models/Trending_Comic_Model.dart';
+import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
@@ -72,83 +75,105 @@ class _ExploreScreenState extends State<ExploreScreen> {
           ),
           SizedBox(height: height * 0.05),
           // Vertical ListView for comic cards
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Container(
-                    height: height * 0.25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/comic_placeholder.jpg'),
-                        fit: BoxFit.cover,
+      FutureBuilder<TrendingApiModel>(
+        future: ComicViewModel().fetchTrendingComicApi(),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primary,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (snapshot.hasData) {
+            return Expanded(
+              child: ListView.builder(
+                itemCount: min(8, snapshot.data!.data!.results!.length), // Limit to 8 comics
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Container(
+                      height: height * 0.25,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            '${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    child: Stack(
-                      children: [
-                        // Gradient overlay
-                        Positioned.fill(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.black.withOpacity(0.7),
-                                  Colors.transparent,
-                                ],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
+                      child: Stack(
+                        children: [
+                          // Gradient overlay
+                          Positioned.fill(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.black.withOpacity(0.7),
+                                    Colors.transparent,
+                                  ],
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        // Comic name and author
-                        Positioned(
-                          bottom: 10,
-                          left: 10,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Comic Name $index',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                          // Comic name and author
+                          Positioned(
+                            bottom: 10,
+                            left: 10,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  snapshot.data!.data!.results![index].title.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                'Author Name $index',
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 14,
+                                const SizedBox(height: 5),
+                                Text(
+                                  snapshot.data!.data!.results![index].creators.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 14,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        // Favorite icon button
-                        Positioned(
-                          top: 10,
-                          right: 10,
-                          child: IconButton(
-                            icon: const Icon(Icons.favorite_border, color: Colors.white),
-                            onPressed: () {
-                              // Handle favorite button action
-                            },
+                          // Favorite icon button
+                          Positioned(
+                            top: 10,
+                            right: 10,
+                            child: IconButton(
+                              icon: const Icon(Icons.favorite_border, color: Colors.white),
+                              onPressed: () {
+                                // Handle favorite button action
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-          ),
+                  );
+                },
+              ),
+            );
+          } else {
+            return const Center(child: Text('No data available'));
+          }
+        },
+      ),
+
         ],
       ),
     );
