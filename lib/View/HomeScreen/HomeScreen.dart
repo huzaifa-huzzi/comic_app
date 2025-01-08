@@ -243,36 +243,38 @@ class _HomeScreenState extends State<HomeScreen> {
                            itemBuilder: (context, index) {
                              return Stack(
                                children: [
-                                 Container(
-                                   height: height * 0.25,
-                                   width: width * 0.5,
-                                   margin: const EdgeInsets.symmetric(horizontal: 10),
-                                   decoration: BoxDecoration(
-                                     color: Colors.blue,
-                                     image:  DecorationImage(
-                                       image: AssetImage(snapshot.data!.data!.results![index].thumbnail.toString()),
-                                       fit: BoxFit.cover,
-                                     ),
-                                     borderRadius: BorderRadius.circular(15),
+                               Container(
+                               height: height * 0.25,
+                               width: width * 0.5,
+                               margin: const EdgeInsets.symmetric(horizontal: 10),
+                               decoration: BoxDecoration(
+                                 color: Colors.blue,
+                                 image: DecorationImage(
+                                   image: NetworkImage(
+                                     '${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
                                    ),
-                                   child:  Column(
-                                     mainAxisAlignment: MainAxisAlignment.end,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     children: [
-                                       Padding(
-                                         padding: const EdgeInsets.all(10.0),
-                                         child: Text(
-                                           snapshot.data!.data!.results![index].name.toString(),
-                                           style: const TextStyle(
-                                             fontSize: 16,
-                                             fontWeight: FontWeight.w400,
-                                             color: Colors.white,
-                                           ),
-                                         ),
-                                       ),
-                                     ],
-                                   ),
+                                   fit: BoxFit.cover,
                                  ),
+                                 borderRadius: BorderRadius.circular(15),
+                               ),
+                               child: Column(
+                                 mainAxisAlignment: MainAxisAlignment.end,
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Padding(
+                                     padding: const EdgeInsets.all(10.0),
+                                     child: Text(
+                                       snapshot.data!.data!.results![index].name.toString(),
+                                       style: const TextStyle(
+                                         fontSize: 16,
+                                         fontWeight: FontWeight.w400,
+                                         color: Colors.white,
+                                       ),
+                                     ),
+                                   ),
+                                 ],
+                               ),
+                             ),
                                  Positioned(
                                    top: 10,
                                    right: 10,
