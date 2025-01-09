@@ -72,11 +72,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(
                                   builder:(context) => DetailMovieScreen(
-                                      imageUrl:snapshot.data!.data![index].coverUrl.toString() ,
+                                      imageUrl: snapshot.data!.data![index].coverUrl.toString(),
                                       title: snapshot.data!.data![index].title.toString(),
-                                      description: snapshot.data!.data![index].directedBy.toString(),
-                                      source: snapshot.data!.data![index].trailerUrl.toString(),
-                                      date: snapshot.data!.data![index].releaseDate.toString())
+                                      author: snapshot.data!.data![index].directedBy.toString(),
+                                      description: snapshot.data!.data![index].overview.toString(),
+                                       url: snapshot.data!.data![index].trailerUrl.toString()
+                                    ,)
                               ),
                               );
                             },

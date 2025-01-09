@@ -1,16 +1,16 @@
-import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailMovieScreen extends StatelessWidget {
-  final String imageUrl, title, description, source, date;
+  final String imageUrl, title, author, description;
+  final String url;
+
   const DetailMovieScreen({
     super.key,
     required this.imageUrl,
     required this.title,
+    required this.author,
     required this.description,
-    required this.source,
-    required this.date,
+    required this.url,
   });
 
   @override
@@ -19,145 +19,131 @@ class DetailMovieScreen extends StatelessWidget {
     final height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      body: Stack(
+      backgroundColor: Colors.white,
+      body: Column(
         children: [
-          // Image Section
-          SizedBox(
-            height: height * 0.5,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomRight: Radius.circular(40),
-              ),
-              child: Image(image: NetworkImage(imageUrl)),
-            ),
-          ),
-
-          // Content Section
-          Positioned(
-            top: height * 0.4,
-            child: Container(
-              height: height * 0.6,
-              width: width,
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(40),
+          // Image Header
+          Stack(
+            children: [
+              Container(
+                height: height * 0.55,
+                width: width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(imageUrl),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(height: height * 0.02),
+              Positioned(
+                top: 40,
+                left: 20,
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
+              Positioned(
+                top: 40,
+                right: 20,
+                child: IconButton(
+                  icon: const Icon(Icons.more_vert, color: Colors.white),
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          ),
 
-                  // Source and Date Row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        source,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w600,
+          // Details Section
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color(0xFF004D40), // Greenish background
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Language, Pages, Likes, and Rating
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          url,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Title and Author
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      author,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Description
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Text(
+                          description,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
-                      Text(
-                        date,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.02),
-
-                  // Description
-                  Expanded(
-                    child: Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.w500,
-                      ),
                     ),
-                  ),
 
-                  // Bottom Row: Like Button and Play Button
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Like Button
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              // Handle like button action
-                            },
-                            icon: const Icon(
-                              Icons.favorite_border,
-                              color: Colors.red,
-                              size: 30,
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            "14.6K",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      // Play Button
-                      ElevatedButton(
+                    // Read Now Button
+                    Center(
+                      child: ElevatedButton.icon(
                         onPressed: () {
-                          // Handle Play action
+                          // Handle favorite button press
                         },
+                        icon: const Icon(
+                          Icons.favorite,
+                          color: Colors.red, // Heart icon in red color
+                        ),
+
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 40,
+                            horizontal: 50,
                             vertical: 15,
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          backgroundColor: Colors.blue,
-                        ),
-                        child: Text(
-                          "Play",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+
+                  ],
+                ),
               ),
             ),
           ),
