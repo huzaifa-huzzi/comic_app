@@ -1,10 +1,12 @@
+import 'package:comic_reading_app/View_model/Controllers/DetailMovieScreenController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DetailMovieScreen extends StatelessWidget {
-  final String imageUrl, title, author, description;
-  final String url;
+  final String imageUrl, title, author, description, url;
+  final DetailMovieController controller = Get.put(DetailMovieController());
 
-  const DetailMovieScreen({
+  DetailMovieScreen({
     super.key,
     required this.imageUrl,
     required this.title,
@@ -59,7 +61,7 @@ class DetailMovieScreen extends StatelessWidget {
             child: Container(
               width: double.infinity,
               decoration: const BoxDecoration(
-                color: Color(0xFF004D40), // Greenish background
+                color: Color(0xFF004D40),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25),
                   topRight: Radius.circular(25),
@@ -70,20 +72,27 @@ class DetailMovieScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Language, Pages, Likes, and Rating
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          url,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
+                        InkWell(
+                          onTap: () => controller.openUrl(url),
+                          child: Text(
+                            url.length > 30 ? "${url.substring(0, 30)}..." : url,
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.copy, color: Colors.white),
+                          onPressed: () => controller.copyToClipboard(url),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: height * 0.01),
 
                     // Title and Author
                     Text(
@@ -94,7 +103,7 @@ class DetailMovieScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: height * 0.01),
                     Text(
                       author,
                       style: const TextStyle(
@@ -102,7 +111,7 @@ class DetailMovieScreen extends StatelessWidget {
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: height * 0.02 ),
 
                     // Description
                     Expanded(
@@ -116,18 +125,11 @@ class DetailMovieScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    // Read Now Button
                     Center(
-                      child: ElevatedButton.icon(
+                      child: ElevatedButton(
                         onPressed: () {
                           // Handle favorite button press
                         },
-                        icon: const Icon(
-                          Icons.favorite,
-                          color: Colors.red, // Heart icon in red color
-                        ),
-
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           foregroundColor: Colors.black,
@@ -139,9 +141,13 @@ class DetailMovieScreen extends StatelessWidget {
                             vertical: 15,
                           ),
                         ),
+                        child: const Icon(
+                          Icons.favorite,
+                          color: Colors.grey, // Set to any color you prefer, e.g., grey
+                          size: 30, // Set the size of the heart icon
+                        ),
                       ),
-                    ),
-
+                    )
                   ],
                 ),
               ),

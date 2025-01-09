@@ -5,6 +5,7 @@ import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/SectionHeading.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'dart:math';
 import '../../Models/Trending_Comic_Model.dart';
 
@@ -70,16 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder:(context) => DetailMovieScreen(
-                                      imageUrl: snapshot.data!.data![index].coverUrl.toString(),
-                                      title: snapshot.data!.data![index].title.toString(),
-                                      author: snapshot.data!.data![index].directedBy.toString(),
-                                      description: snapshot.data!.data![index].overview.toString(),
-                                       url: snapshot.data!.data![index].trailerUrl.toString()
-                                    ,)
-                              ),
-                              );
+                              Get.to(() => DetailMovieScreen(
+                                imageUrl: snapshot.data!.data![index].coverUrl.toString(),
+                                title: snapshot.data!.data![index].title.toString(),
+                                author: snapshot.data!.data![index].directedBy.toString(),
+                                description: snapshot.data!.data![index].overview.toString(),
+                                url: snapshot.data!.data![index].trailerUrl.toString(),
+                              ));
                             },
                             child: Stack(
                               children: [
