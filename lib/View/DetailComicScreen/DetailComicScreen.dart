@@ -63,7 +63,7 @@ class DetailComicScreen extends StatelessWidget {
               width: double.infinity,
               decoration:  BoxDecoration(
                 color: AppColors.primary,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(25),
                   topRight: Radius.circular(25),
                 ),
