@@ -1,4 +1,5 @@
 import 'package:comic_reading_app/View_model/Controllers/DetailMovieScreenController.dart';
+import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,8 +61,8 @@ class DetailMovieScreen extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Color(0xFF004D40),
+              decoration:  BoxDecoration(
+                color: AppColors.primary,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25),
                   topRight: Radius.circular(25),
