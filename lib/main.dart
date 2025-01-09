@@ -1,7 +1,7 @@
-import 'package:comic_reading_app/View/Continuing/ContinuingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'View/SplashScreen/SplashScreen.dart';
 import 'firebase_options.dart';
 
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       title: 'Comic App',
       debugShowCheckedModeBanner: false,
-      home: ContinuingScreen() ,
+      home: SplashScreen() ,
     );
   }
 }
