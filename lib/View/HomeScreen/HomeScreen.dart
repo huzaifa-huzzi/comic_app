@@ -1,5 +1,6 @@
 import 'package:comic_reading_app/Models/Characters_comic_Model.dart';
 import 'package:comic_reading_app/Models/Movies_Model.dart';
+import 'package:comic_reading_app/View/DetailComicScreen/DetailComicScreen.dart';
 import 'package:comic_reading_app/View/DetailMoviesScreen/DetailMovieScreen.dart';
 import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
@@ -172,65 +173,76 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: min(6, snapshot.data!.data!.results!.length),
                         itemBuilder: (context, index) {
-                          return Stack(
-                            children: [
-                              Container(
-                                height: height * 0.25,
-                                width: width * 0.5,
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      '${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            snapshot.data!.data!.results![index].title.toString(),
-                                            style: const TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          SizedBox(height: height * 0.01),
-                                          Text(
-                                            snapshot.data!.data!.results![index].description.toString(),
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
+                          return InkWell(
+                            onTap: (){
+                              Get.to(() => DetailComicScreen(
+                                  imageUrl:'${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
+                                  title: snapshot.data!.data!.results![index].title.toString(),
+                                  author: snapshot.data!.data!.results![index].creators.toString(),
+                                  description: snapshot.data!.data!.results![index].description.toString(),
+                                  url: snapshot.data!.data!.results![index].format.toString()
+                              ));
+                            },
+                            child: Stack(
+                              children: [
+                                Container(
+                                  height: height * 0.25,
+                                  width: width * 0.5,
+                                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        '${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
                                       ),
+                                      fit: BoxFit.cover,
                                     ),
-                                  ],
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              snapshot.data!.data!.results![index].title.toString(),
+                                              style: const TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(height: height * 0.01),
+                                            Text(
+                                              snapshot.data!.data!.results![index].description.toString(),
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: IconButton(
-                                  icon: const Icon(Icons.favorite_border, color: Colors.white),
-                                  onPressed: () {
-                                    // Handle favorite button tap here
-                                  },
+                                Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: IconButton(
+                                    icon: const Icon(Icons.favorite_border, color: Colors.white),
+                                    onPressed: () {
+                                      // Handle favorite button tap here
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         },
                       );
