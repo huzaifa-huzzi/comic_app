@@ -1,7 +1,8 @@
+import 'package:comic_reading_app/View/Authentication/SignUpScreen/SignUpScreen.dart';
+import 'package:comic_reading_app/View_model/Controllers/LoginController.dart';
 import 'package:comic_reading_app/resources/Components/RoundButtonAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,8 +12,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final _formKey = GlobalKey<FormState>();
+  final LoginController controller = Get.put(LoginController());
   bool _isPasswordVisible = false;
 
   @override
@@ -21,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
@@ -39,16 +41,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
               SizedBox(height: height * 0.05),
 
-              // "Create Account" text
+              // "Welcome Back" text
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    'Welcome Back ',
+                    'Welcome Back',
                     style: TextStyle(
                       fontSize: 35,
-                      color:Color.fromRGBO(96, 37, 166, 1.0) ,
+                      color: Color.fromRGBO(96, 37, 166, 1.0),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -79,8 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       SizedBox(height: height * 0.03),
-
-                      // Username Field
                       TextFormField(
                         controller: controller.usernameController,
                         decoration: InputDecoration(
@@ -96,7 +96,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       SizedBox(height: height * 0.03),
-
                       // Password Field
                       TextFormField(
                         controller: controller.passwordController,
@@ -132,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
                           onTap: () {
-                            // Add your forgot password functionality
+                            // Add forgot password functionality
                           },
                           child: Text(
                             'Forgot Password?',
@@ -145,30 +144,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: height * 0.05),
 
-                      // Submit Button
-                      Obx((){
+                      // Login Button
+                      Obx(() {
                         return RoundButtonAuth(
-                            title: 'SignUp',
-                            ontap: (){
-                              if (_formKey.currentState!.validate()) {
-                                String email = controller.emailController.text;
-                                String username = controller.usernameController.text;
-                                String password = controller.passwordController.text;
-                                controller.signUpFtn(email, username, password, context);
-                              }
-                            });
+                          title: 'Login',
+                          loading: controller.loading.value,
+                          ontap: () {
+                            if (_formKey.currentState!.validate()) {
+
+                            }
+                            String email = controller.emailController.text.trim();
+                            String password = controller.passwordController.text.trim();
+                            String username = controller.usernameController.text.trim();
+
+                            controller.login(email, password, username, context);
+                          },
+                        );
                       }),
 
                       SizedBox(height: height * 0.03),
 
-                      // "Have an Account? Sign in" text
+                      // "Don't have an Account? Create Account" text
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Dont have an Account?'),
+                          const Text('Don\'t have an Account?'),
                           GestureDetector(
                             onTap: () {
-                              // Navigate to Sign In screen
+                              Get.to(() => SignUpScreen());
                             },
                             child: Text(
                               ' Create Account',

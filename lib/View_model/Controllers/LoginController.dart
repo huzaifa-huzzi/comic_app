@@ -12,9 +12,10 @@ class LoginController extends GetxController {
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var usernameController = TextEditingController();
   final loading = false.obs;
 
-  void login(String email, String password, BuildContext context) async {
+  void login(String email, String password, String username,BuildContext context) async {
     loading.value = true;
 
     try {
@@ -27,9 +28,10 @@ class LoginController extends GetxController {
         await _ref.child(userCredential.user!.uid).set({
           'uid': userCredential.user!.uid,
           'email': userCredential.user!.email,
+          'username' :username,
         });
         loading.value = false;
-        Get.to(() => DashboardScreen()); // Adjust your route name here
+        Get.to(() => DashboardScreen());
         Utils.snackBar('Login', 'Login Successful');
       } else {
         loading.value = false;

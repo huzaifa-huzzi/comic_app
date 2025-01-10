@@ -1,5 +1,7 @@
+import 'package:comic_reading_app/View/Authentication/LoginScreen/LoginScreen.dart';
 import 'package:comic_reading_app/resources/Components/RoundButton.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -47,7 +49,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             /// Logout
             Padding(
               padding: const EdgeInsets.only(left: 35),
-              child: RoundButton(title: 'Logout', onTap: (){}),
+              child: RoundButton(title: 'Logout', onTap: (){
+                Get.to(() => LoginScreen());
+              }),
             ),
           ],
         ),

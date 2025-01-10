@@ -1,3 +1,4 @@
+import 'package:comic_reading_app/View/Authentication/LoginScreen/LoginScreen.dart';
 import 'package:comic_reading_app/View_model/Controllers/SignUpController.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/RoundButtonAuthentication.dart';
@@ -78,7 +79,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                       SizedBox(height: height * 0.03),
-
                       // Username Field
                       TextFormField(
                         controller: controller.usernameController,
@@ -126,37 +126,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       SizedBox(height: height * 0.03),
 
-                      // "Forgot Password" text
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            // Add your forgot password functionality
-                          },
-                          child: Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              color: Color.fromRGBO(96, 37, 166, 1.0),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: height * 0.05),
-
                       // Submit Button
-                      Obx((){
-                        return RoundButtonAuth(
-                            title: 'SignUp',
-                            ontap: (){
-                              if (_formKey.currentState!.validate()) {
-                                String email = controller.emailController.text;
-                                String username = controller.usernameController.text;
-                                String password = controller.passwordController.text;
-                                controller.signUpFtn(email, username, password, context);
-                              }
-                            });
-                      }),
+                      RoundButtonAuth(
+                        title: 'SignUp',
+                        ontap: () {
+                          if (_formKey.currentState!.validate()) {
+                            String email = controller.emailController.text;
+                            String username = controller.usernameController.text;
+                            String password = controller.passwordController.text;
+                            controller.signUpFtn(email, username, password, context);
+                          }
+                        },
+                      ),
+
 
                       SizedBox(height: height * 0.03),
 
@@ -167,7 +149,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           const Text('Have an Account?'),
                           GestureDetector(
                             onTap: () {
-                              // Navigate to Sign In screen
+                              Get.to(() => const LoginScreen());
                             },
                             child: Text(
                               ' Sign in',
