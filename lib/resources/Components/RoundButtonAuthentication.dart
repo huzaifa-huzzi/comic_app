@@ -20,7 +20,7 @@ class RoundButtonAuth extends StatelessWidget {
           color:const Color.fromRGBO(96, 37, 166, 1.0),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: loading ?const LoadingIndicator(indicatorType:Indicator.ballClipRotate,colors:[Colors.white],) :  Center(child: Text(title,style: TextStyle(fontSize: 22,color: Colors.white,fontWeight: FontWeight.w500),),),
+        child: loading ?const LoadingIndicator(indicatorType:Indicator.ballClipRotate,colors:[Colors.white],) :  Center(child: Text(title,style: const TextStyle(fontSize: 22,color: Colors.white,fontWeight: FontWeight.w500),),),
       ),
     );
   }

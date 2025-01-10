@@ -31,7 +31,7 @@ class LoginController extends GetxController {
           'username' :username,
         });
         loading.value = false;
-        Get.to(() => DashboardScreen());
+        Get.to(() => const DashboardScreen());
         Utils.snackBar('Login', 'Login Successful');
       } else {
         loading.value = false;

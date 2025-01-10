@@ -42,10 +42,10 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: height * 0.05),
 
               // "Welcome Back" text
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     'Welcome Back',
                     style: TextStyle(
@@ -68,10 +68,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Email Field
                       TextFormField(
                         controller: controller.emailController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Email',
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.email),
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.email),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -83,10 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: height * 0.03),
                       TextFormField(
                         controller: controller.usernameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Username',
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.person),
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.person),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             // Add forgot password functionality
                           },
-                          child: Text(
+                          child: const Text(
                             'Forgot Password?',
                             style: TextStyle(
                               color: Color.fromRGBO(96, 37, 166, 1.0),
@@ -151,13 +151,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           loading: controller.loading.value,
                           ontap: () {
                             if (_formKey.currentState!.validate()) {
-
+                              String email = controller.emailController.text.trim();
+                              String password = controller.passwordController.text.trim();
+                              String username = controller.usernameController.text.trim();
+                              controller.login(email, password, username, context);
                             }
-                            String email = controller.emailController.text.trim();
-                            String password = controller.passwordController.text.trim();
-                            String username = controller.usernameController.text.trim();
 
-                            controller.login(email, password, username, context);
                           },
                         );
                       }),
@@ -171,9 +170,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           const Text('Don\'t have an Account?'),
                           GestureDetector(
                             onTap: () {
-                              Get.to(() => SignUpScreen());
+                              Get.to(() => const SignUpScreen());
                             },
-                            child: Text(
+                            child: const Text(
                               ' Create Account',
                               style: TextStyle(
                                 color: Color.fromRGBO(96, 37, 166, 1.0),

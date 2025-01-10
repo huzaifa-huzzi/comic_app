@@ -8,8 +8,7 @@ class SessionManager {
     return _session;
   }
 
-  SessionManager._internal(){
-  }
+  SessionManager._internal();
 
 
 

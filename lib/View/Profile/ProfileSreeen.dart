@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.only(left: 35),
               child: RoundButton(title: 'Logout', onTap: (){
-                Get.to(() => LoginScreen());
+                Get.to(() => const LoginScreen());
               }),
             ),
           ],

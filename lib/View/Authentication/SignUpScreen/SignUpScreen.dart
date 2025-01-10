@@ -1,11 +1,12 @@
 import 'package:comic_reading_app/View/Authentication/LoginScreen/LoginScreen.dart';
 import 'package:comic_reading_app/View_model/Controllers/SignUpController.dart';
-import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/RoundButtonAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -40,10 +41,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: height * 0.05),
 
               // "Create Account" text
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     'Create Account',
                     style: TextStyle(
@@ -66,10 +67,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Email Field
                       TextFormField(
                         controller: controller.emailController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Email',
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.email),
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.email),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -82,10 +83,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Username Field
                       TextFormField(
                         controller: controller.usernameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Username',
-                          border: const OutlineInputBorder(),
-                          prefixIcon: const Icon(Icons.person),
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.person),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -129,6 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // Submit Button
                       RoundButtonAuth(
                         title: 'SignUp',
+                        loading: controller.loading.value,
                         ontap: () {
                           if (_formKey.currentState!.validate()) {
                             String email = controller.emailController.text;
@@ -151,7 +153,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onTap: () {
                               Get.to(() => const LoginScreen());
                             },
-                            child: Text(
+                            child: const Text(
                               ' Sign in',
                               style: TextStyle(
                                 color: Color.fromRGBO(96, 37, 166, 1.0),
