@@ -1,17 +1,18 @@
-import 'package:comic_reading_app/View_model/Controllers/SignUpController.dart';
-import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/RoundButtonAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpScreen extends StatefulWidget {
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<LoginScreen> {
+
   final _formKey = GlobalKey<FormState>();
-  final controller = Get.put(SignUpController());
   bool _isPasswordVisible = false;
 
   @override
@@ -44,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    'Create Account',
+                    'Welcome Back ',
                     style: TextStyle(
                       fontSize: 35,
                       color:Color.fromRGBO(96, 37, 166, 1.0) ,
@@ -164,13 +165,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Have an Account?'),
+                          const Text('Dont have an Account?'),
                           GestureDetector(
                             onTap: () {
                               // Navigate to Sign In screen
                             },
                             child: Text(
-                              ' Sign in',
+                              ' Create Account',
                               style: TextStyle(
                                 color: Color.fromRGBO(96, 37, 166, 1.0),
                                 fontWeight: FontWeight.bold,
