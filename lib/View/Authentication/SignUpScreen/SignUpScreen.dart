@@ -1,11 +1,11 @@
 
-
-
 import 'package:comic_reading_app/View/Authentication/LoginScreen/LoginScreen.dart';
 import 'package:comic_reading_app/View_model/Controllers/SignUpController.dart';
 import 'package:comic_reading_app/resources/Components/RoundButtonAuthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
