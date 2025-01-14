@@ -1,5 +1,4 @@
 
-
 import 'package:comic_reading_app/View/Authentication/SignUpScreen/SignUpScreen.dart';
 import 'package:comic_reading_app/View_model/Controllers/LoginController.dart';
 import 'package:comic_reading_app/resources/Components/RoundButtonAuthentication.dart';
