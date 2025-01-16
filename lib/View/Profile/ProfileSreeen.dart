@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
