@@ -21,6 +21,8 @@ class ForgotPasswordScreen extends StatelessWidget {
           'Forgot Password',
           style: TextStyle(fontSize: 25, color: AppColors.primary),
         ),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -60,7 +62,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      SizedBox(height: height * 0.03),
+                      SizedBox(height: height * 0.07),
 
                       /// Submit Button
                       Obx(
