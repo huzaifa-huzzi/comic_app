@@ -1,4 +1,3 @@
-
 import 'package:comic_reading_app/View/Authentication/SignUpScreen/SignUpScreen.dart';
 import 'package:comic_reading_app/View_model/Controllers/LoginController.dart';
 import 'package:comic_reading_app/resources/Components/RoundButtonAuthentication.dart';
@@ -133,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
                           onTap: () {
-                            // Add forgot password functionality
+                            Get.to(() => const LoginScreen());
                           },
                           child: const Text(
                             'Forgot Password?',
