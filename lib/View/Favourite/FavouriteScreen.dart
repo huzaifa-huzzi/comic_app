@@ -33,7 +33,7 @@ class FavoriteScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Display Favorite Movies and Comics directly
-              Text('Favourite Movies',style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),),
+              const Text('Favourite Movies',style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),),
               SizedBox(height: height * 0.02),
               SizedBox(
                 height: height * 0.25,
@@ -87,7 +87,7 @@ class FavoriteScreen extends StatelessWidget {
               ),
 
               // Display Favorite Comics directly
-              Text('Favourite Comics',style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),),
+              const Text('Favourite Comics',style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),),
               SizedBox(height: height * 0.02),
               SizedBox(
                 height: height * 0.25,
