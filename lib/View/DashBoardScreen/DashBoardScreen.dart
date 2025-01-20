@@ -18,11 +18,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   List<Widget> _buildScreens() {
-    return const   [
-      HomeScreen(),
-       ExploreScreen(),
-      FavouriteScreen(),
-      ProfileScreen()
+    return    [
+      const HomeScreen(),
+       const ExploreScreen(),
+      FavoriteScreen(),
+      const ProfileScreen()
     ];
   }
 

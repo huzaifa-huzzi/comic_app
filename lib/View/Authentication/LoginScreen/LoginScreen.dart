@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(automaticallyImplyLeading: false,),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(

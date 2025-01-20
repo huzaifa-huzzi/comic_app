@@ -1,7 +1,7 @@
-import 'package:comic_reading_app/Models/Characters_comic_Model.dart';
 import 'package:comic_reading_app/Models/Movies_Model.dart';
 import 'package:comic_reading_app/View/DetailComicScreen/DetailComicScreen.dart';
 import 'package:comic_reading_app/View/DetailMoviesScreen/DetailMovieScreen.dart';
+import 'package:comic_reading_app/View_model/Controllers/FavouriteController.dart';
 import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:comic_reading_app/resources/Components/SectionHeading.dart';
@@ -20,6 +20,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final favoriteController = Get.put(FavoriteController()); // Inject the controller
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -53,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               SizedBox(height: height * 0.03),
 
-              /// Trendings Designs (Done)
+              /// Trending Movies
               SizedBox(height: height * 0.03),
               const SectionHeading(title: 'Trending Movies'),
               SizedBox(height: height * 0.03),
@@ -61,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: height * 0.25,
                 width: width * 0.9,
                 child: FutureBuilder<Movies_Model>(
-                  future: ComicViewModel().fetchMoviesApi(), // Your method for fetching data
-                  builder: (BuildContext context,snapshot) {
+                  future: ComicViewModel().fetchMoviesApi(),
+                  builder: (BuildContext context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
@@ -70,10 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     } else if (snapshot.hasData) {
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount:snapshot.data!.total,
+                        itemCount: snapshot.data!.total,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: (){
+                            onTap: () {
                               Get.to(() => DetailMovieScreen(
                                 imageUrl: snapshot.data!.data![index].coverUrl.toString(),
                                 title: snapshot.data!.data![index].title.toString(),
@@ -90,52 +92,27 @@ class _HomeScreenState extends State<HomeScreen> {
                                   margin: const EdgeInsets.symmetric(horizontal: 10),
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: NetworkImage(snapshot.data!.data![index].coverUrl.toString()),  // Fetch the image using the URL
+                                      image: NetworkImage(snapshot.data!.data![index].coverUrl.toString()),
                                       fit: BoxFit.cover,
                                     ),
                                     borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                        snapshot.data!.data![index].title.toString(),
-                                              style: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            SizedBox(height: height * 0.01),
-                                            Text(
-                                              snapshot.data!.data![index].directedBy.toString() ,  // Display author info
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ),
                                 Positioned(
                                   top: 10,
                                   right: 10,
-                                  child: IconButton(
-                                    icon: const Icon(Icons.favorite_border, color: Colors.white),
-                                    onPressed: () {
-                                      // Handle favorite button tap here
-                                    },
-                                  ),
+                                  child: Obx(() {
+                                    final isFavorite = favoriteController.favoriteMovies.contains(index);
+                                    return IconButton(
+                                      icon: Icon(
+                                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        favoriteController.toggleFavoriteMovie(index);
+                                      },
+                                    );
+                                  }),
                                 ),
                               ],
                             ),
@@ -148,7 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-
 
               /// Recommended Comics
               SizedBox(height: height * 0.03),
@@ -176,14 +152,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: min(6, snapshot.data!.data!.results!.length),
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: (){
+                            onTap: () {
                               Get.to(() => DetailComicScreen(
-                                  imageUrl:'${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
+                                  imageUrl:
+                                  '${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
                                   title: snapshot.data!.data!.results![index].title.toString(),
                                   author: snapshot.data!.data!.results![index].creators.toString(),
                                   description: snapshot.data!.data!.results![index].description.toString(),
-                                  url: snapshot.data!.data!.results![index].format.toString()
-                              ));
+                                  url: snapshot.data!.data!.results![index].format.toString()));
                             },
                             child: Stack(
                               children: [
@@ -192,7 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: width * 0.5,
                                   margin: const EdgeInsets.symmetric(horizontal: 10),
                                   decoration: BoxDecoration(
-                                    color: Colors.blue,
                                     image: DecorationImage(
                                       image: NetworkImage(
                                         '${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
@@ -201,130 +176,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              snapshot.data!.data!.results![index].title.toString(),
-                                              style: const TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            SizedBox(height: height * 0.01),
-                                            Text(
-                                              snapshot.data!.data!.results![index].description.toString(),
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
                                 ),
                                 Positioned(
                                   top: 10,
                                   right: 10,
-                                  child: IconButton(
-                                    icon: const Icon(Icons.favorite_border, color: Colors.white),
-                                    onPressed: () {
-                                      // Handle favorite button tap here
-                                    },
-                                  ),
+                                  child: Obx(() {
+                                    final isFavorite = favoriteController.favoriteComics.contains(index);
+                                    return IconButton(
+                                      icon: Icon(
+                                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        favoriteController.toggleFavoriteComic(index);
+                                      },
+                                    );
+                                  }),
                                 ),
                               ],
                             ),
-                          );
-                        },
-                      );
-                    } else {
-                      return const Center(child: Text('No data available'));
-                    }
-                  },
-                ),
-              ),
-
-
-              /// Top Characters
-              SizedBox(height: height * 0.03),
-              const SectionHeading(title: 'Top Characters'),
-              SizedBox(height: height * 0.03),
-              SizedBox(
-                height: height * 0.25,
-                width: width * 0.9,
-                child: FutureBuilder<CharactersComicModel>(
-                  future: ComicViewModel().fetchCharacterApi(),
-                  builder: (BuildContext context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.primary,
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    } else if (snapshot.hasData) {
-                      return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: min(6, snapshot.data!.data!.results!.length), // Limit to 6 items
-                        itemBuilder: (context, index) {
-                          return Stack(
-                            children: [
-                              Container(
-                                height: height * 0.25,
-                                width: width * 0.5,
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      '${snapshot.data!.data!.results![index].thumbnail!.path!}.${snapshot.data!.data!.results![index].thumbnail!.extension!}',
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Text(
-                                        snapshot.data!.data!.results![index].name.toString(),
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: IconButton(
-                                  icon: const Icon(Icons.favorite_border, color: Colors.white),
-                                  onPressed: () {
-                                    // Handle favorite button tap here
-                                  },
-                                ),
-                              ),
-                            ],
                           );
                         },
                       );

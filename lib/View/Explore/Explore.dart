@@ -1,5 +1,6 @@
 import 'package:comic_reading_app/Models/Trending_Comic_Model.dart';
 import 'package:comic_reading_app/View/DetailComicScreen/DetailComicScreen.dart';
+import 'package:comic_reading_app/View_model/Controllers/FavouriteController.dart';
 import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
     'Fantasy',
     'SuperHeroes',
   ];
+
+  final favoriteController = Get.put(FavoriteController());
 
   @override
   Widget build(BuildContext context) {
@@ -167,12 +170,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             Positioned(
                               top: 10,
                               right: 10,
-                              child: IconButton(
-                                icon: const Icon(Icons.favorite_border, color: Colors.white),
-                                onPressed: () {
-                                  // Handle favorite button action
-                                },
-                              ),
+                              child: Obx(() {
+                                final isFavorite = favoriteController.favoriteMovies.contains(index);
+                                return IconButton(
+                                  icon: Icon(
+                                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    favoriteController.toggleFavoriteMovie(index);
+                                  },
+                                );
+                              }),
                             ),
                           ],
                         ),
