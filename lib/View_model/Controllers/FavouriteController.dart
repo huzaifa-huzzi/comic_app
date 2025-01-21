@@ -3,8 +3,8 @@
 import 'package:get/get.dart';
 
 class FavoriteController extends GetxController {
-  var favoriteMovies = <int>[].obs; // List of favorite movie IDs
-  var favoriteComics = <int>[].obs; // List of favorite comic IDs
+  var favoriteMovies = <int>[].obs;
+  var favoriteComics = <int>[].obs;
 
   void toggleFavoriteMovie(int id) {
     if (favoriteMovies.contains(id)) {
