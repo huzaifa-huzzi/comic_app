@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:get/get.dart';
 
+
+
 class ProfileController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance; // Use Firestore
