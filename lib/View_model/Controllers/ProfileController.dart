@@ -91,7 +91,7 @@ class ProfileController extends GetxController {
     setLoading(true);
     try {
       await _auth.signOut().then((value) {
-        Get.to(() => LoginScreen());
+        Get.to(() => const  LoginScreen());
         Utils.toastMessage('Logout Successful');
         setLoading(false);
       }).onError((error, stackTrace) {
