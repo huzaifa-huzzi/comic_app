@@ -5,8 +5,9 @@ import 'package:comic_reading_app/View_model/comic_view_Model.dart';
 import 'package:comic_reading_app/resources/Color/Colors.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-
 import 'package:get/get.dart';
+
+
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
